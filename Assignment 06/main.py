@@ -40,25 +40,28 @@ if msg:
             ]
         }
 
+        with st.chat_message("user"):
+            st.write(msg)
         response = requests.post(
             url,
             headers=headers,
             json=req_data   # better than data=json.dumps
         )
 
-        # 1️⃣ HTTP-level check
+        #HTTP-level check
         if response.status_code != 200:
             st.error(f"HTTP Error {response.status_code}")
             st.code(response.text)
         else:
             res = response.json()
 
-            # 2️⃣ API-level check
+            # API-level check
             if "choices" not in res:
                 st.error("Groq API Error")
                 st.json(res)
             else:
-                st.write(res["choices"][0]["message"]["content"])
+                with st.chat_message("assistant"):
+                    st.write(res["choices"][0]["message"]["content"])
 
     #For the Local API 
 
@@ -72,6 +75,8 @@ if msg:
                 }
             ]
         }
+        with st.chat_message("user"):
+            st.write(msg)
 
         response=requests.post(local_url,headers=local_headers,json=req_data)
 
@@ -86,4 +91,5 @@ if msg:
                 st.json(res)
             
             else:
-                st.write(res["choices"][0]["message"]["content"])
+                with st.chat_message("assistant"):
+                    st.write(res["choices"][0]["message"]["content"])
