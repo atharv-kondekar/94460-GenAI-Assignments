@@ -1,8 +1,5 @@
 from langchain_openai import ChatOpenAI
 
-
-
-
 url = "http://127.0.0.1:1234/v1"
 
 llm = ChatOpenAI(
@@ -19,5 +16,3 @@ while True:
 
     res = llm.invoke(user)
     print("Ai🤖: ",res.content)
-
-
