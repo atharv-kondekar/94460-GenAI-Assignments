@@ -34,6 +34,10 @@ if "messages" not in st.session_state:
         }
     ]
 
+if "results" not in st.session_state:
+    st.session_state.results = []
+
+
 preview = st.container()
 
 #Chat History 
@@ -46,6 +50,15 @@ for msg in st.session_state.messages:
             st.error("Unable to generate SQL for this input ")
         else:
             st.code(msg["content"],language="sql")
+
+# -------------------- STORED QUERY RESULTS --------------------
+if st.session_state.results:
+    st.markdown("## Query Results History")
+    for i, item in enumerate(st.session_state.results):
+        st.markdown(f"### Result {i + 1}")
+        st.code(item["sql"], language="sql")
+        st.dataframe(item["table"])
+
 
 
 # File Upload Logic
@@ -127,5 +140,11 @@ if st.session_state.file is not None:
         result = ps.sqldf(ans,{"data" :st.session_state.df})
         st.table(result)
 
+        st.session_state.results.append({
+            "sql": cleaned_ans,
+            "table": result
+        })
+
+        st.success("Query executed successfully")
 #else:
 #   st.error("File not valid")
