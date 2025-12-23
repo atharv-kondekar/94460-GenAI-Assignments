@@ -1,23 +1,18 @@
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-def cosine_similarity(a,b):
-    return np.dot(a,b)/(np.linalg.norm(a)*(np.linalg.norm(b)))
+def cosine_sim(a,b):
+    return np.dot(a,b)/ ( np.linalg.norm(a) * np.linalg.norm(b) )
 
-
-embed_model = SentenceTransformer("all-MiniLM-L6-v2")   
-
+model = SentenceTransformer('all-MiniLM-L6-v2')
 sentences = [
-    "I love football.",
-    "Soccer is my favorite sports.",
-    "Messi talks spanish."
+    "I love Football",
+    "I love cricket",
+    "I hate football",
+    "I drive the car"
 ]
 
-emebeddings = embed_model.encode(sentences)
-
-
-for embed_vect in emebeddings:
-    print("Len:", len(embed_vect), " --> ", embed_vect[:4])
-
-print("Sentence 1 & 2 similarity:", cosine_similarity(emebeddings[0], emebeddings[1]))
-print("Sentence 1 & 3 similarity:", cosine_similarity(emebeddings[0], emebeddings[2]))
+embedding = model.encode(sentences)
+print(" 1st vs 2nd : ",cosine_sim(embedding[0],embedding[1]))
+print(" 1st vs 3rd : ",cosine_sim(embedding[0],embedding[2]))
+print(" 1st vs 4th : ",cosine_sim(embedding[0],embedding[3]))
