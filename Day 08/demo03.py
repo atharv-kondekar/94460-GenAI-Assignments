@@ -3,7 +3,7 @@ from langchain.embeddings import init_embeddings
 
 llm = init_embeddings(
     model="text-embedding-all-minilm-l6-v2-embedding",
-    provider="openai",
+    provider="openai", # Langchain openai
     base_url="http://127.0.0.1:1234/v1",
     api_key="not needed",
     check_embedding_ctx_length=False
@@ -26,11 +26,13 @@ def load_pdf(pdf_path):
     return content , metadata
 
 
-path = "D:/Intrenship/94460-GenAI-Assignments/Day%2008//resume-003.pdf"
+path =r"D:/Intrenship/94460-GenAI-Assignments/Day 08/resume-003.pdf"
+
+
 
 resume_text ,  resume_info = load_pdf(path)
-print(resume_info)
-print(resume_text)
+print("The Metadata : ➡️",resume_info)
+print("The Actual Data ✅: ",resume_text)
 
 
 resume_embeddings = llm.embed_documents([resume_text])

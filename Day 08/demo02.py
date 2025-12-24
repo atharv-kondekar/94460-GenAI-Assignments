@@ -19,4 +19,4 @@ print("The Text : ",doc.page_content) #content of the document
 # 1. import from text splitter 
 # 2. text_splitter =  RecursiveCharatcerTextSplitter(cunk_size,chunk_overlap,separators=[])
 # 3. sentences = []
-# 4. docs = text_spitter.creater_document(sentence)
+# 4. docs = text_spitter.creater_document(sentence  )
