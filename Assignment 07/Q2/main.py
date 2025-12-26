@@ -1,12 +1,12 @@
 # Create a Streamlit application that takes a city name as input from the user.
 # Fetch the current weather using a Weather API and use an LLM to explain the weather conditions in simple English.
-import streamlit as st 
+
 import os 
 import dotenv
 from langchain.chat_models import init_chat_model
 import requests
 
-#st.title("Weather Finder")
+
 
 dotenv.load_dotenv()
 
