@@ -6,12 +6,12 @@ from dotenv import load_dotenv
 import requests, os
 
 
-# ------------------- ENV -------------------
+
 load_dotenv()
 API_KEY = os.getenv("open_weather")
 
 
-# ------------------- TOOLS -------------------
+#Tools
 @tool
 def calculator(expression: str) -> str:
     """Evaluate math."""
@@ -50,7 +50,7 @@ def knowledge_lookup(query: str) -> str:
         return f"Lookup error: {e}"
 
 
-# ------------------- MODEL & AGENT -------------------
+# Model & Agents
 llm = init_chat_model(
     model="meta-llama-3.1-8b-instruct",
     model_provider="openai",
@@ -71,19 +71,19 @@ Strict tool agent. Rules:
 )
 
 
-# ------------------- STREAMLIT UI -------------------
+# Streamlit
 st.title(" AI Tool Chatbot")
 st.caption("Uses tools for math, weather & knowledge lookup")
 
 
-# ------------------- SESSION STATE -------------------
+# Session state
 if "chat" not in st.session_state:
     st.session_state.chat = []
 
 if "file_content" not in st.session_state:
     st.session_state.file_content = None
 
-# CHAT HISTORY
+# Chat history
 for msg in st.session_state.chat:
     if msg["role"] == "user":
         with st.chat_message("user"):
@@ -94,7 +94,7 @@ for msg in st.session_state.chat:
 
 
 
-#  FILE UPLOAD 
+# File upload
 uploaded_file = st.file_uploader("Upload a file:", type=["txt", "csv", "json"])
 
 if uploaded_file:
@@ -106,7 +106,7 @@ if uploaded_file:
         st.error(" Invalid text file or encoding.")
 
 
-# ------------------- USER INPUT -------------------
+# User Input
 user_msg = st.chat_input("Type your message...")
 
 if user_msg:
