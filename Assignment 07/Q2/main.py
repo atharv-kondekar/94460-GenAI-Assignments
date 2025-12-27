@@ -44,7 +44,7 @@ while True:
 
     temp=data['main']['temp']
     desc=data['weather'][0]['description']
-    humidity=data['main']['humidity']
+    humidity=data['main']['humidity']   
     wind = data['wind']['speed']
 
     llm_input= f"""
