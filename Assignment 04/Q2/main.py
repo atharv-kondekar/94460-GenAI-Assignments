@@ -3,11 +3,11 @@ import pandas as pd
 from datetime import datetime
 import os
 
-# ---------------- Files ----------------
+# Files 
 USERS_FILE = "users.csv"
 FILES_FILE = "userfiles.csv"
 
-# ---------------- Create CSV files if not exist ----------------
+#  Create CSV files if not exist 
 if not os.path.exists(USERS_FILE):
     pd.DataFrame(columns=["userid", "username", "password"]).to_csv(
         USERS_FILE, index=False
@@ -18,7 +18,7 @@ if not os.path.exists(FILES_FILE):
         FILES_FILE, index=False
     )
 
-# ---------------- Helper Functions ----------------
+#  Helper Functions 
 def load_users():
     return pd.read_csv(USERS_FILE, dtype=str)
 
@@ -61,14 +61,14 @@ def save_history(userid, filename):
 
     history.to_csv(FILES_FILE, index=False)
 
-# ---------------- Session State ----------------
+#  Session State 
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
 if "user" not in st.session_state:
     st.session_state.user = None
 
-# ---------------- Sidebar ----------------
+# Sidebar 
 with st.sidebar:
     st.header("Menu")
 
@@ -80,7 +80,7 @@ with st.sidebar:
             ["Explore CSV", "See History", "Logout"]
         )
 
-# ---------------- Pages ----------------
+# Pages 
 if mode == "Home":
     st.title("Welcome")
     st.write("Please login or register to continue.")
